@@ -1,9 +1,21 @@
 pipeline {
     agent any
     stages {
-        stage('Stage 1') {
+        stage('Install dependencies') {
             steps {
-                echo 'Hello FastAPI!'
+                sh 'uv sync'
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                sh 'uv test'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'uv build'
             }
         }
     }
